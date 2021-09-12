@@ -1,0 +1,20 @@
+# имеем некоторое количество пользунов с разными правами
+# права указываем вручную в коде
+# на вывод нужно получить строку-команду чтоб каждому юзеру присваивались группы
+# скрипт сделан для теста работы со списками и требует доработки
+
+list_groups = ['read', 'write', 'notification', 'confirmation']
+first_user = ['first_user'] + ['read', 'write']  #не получается добавить срезом из списка
+second_user = ['second_user'] + ['notification']
+leader = ['leader'] + list_groups
+list_users = [first_user, second_user, leader]
+i = 0 
+for user in list_users:
+  message = (f"ipa group-add-member {list_users[i][0]}")
+  j = 0
+  for group in list_users[i]:
+    if j > 0:
+      message += (f" --group={list_users[i][j]}")
+    j += 1
+  print(message)
+  i += 1
